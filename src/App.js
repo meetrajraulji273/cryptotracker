@@ -6,7 +6,7 @@ import Compare from "./pages/Compare";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Watchlist from "./pages/Watchlist";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
@@ -21,11 +21,10 @@ function App() {
 
   var cursor;
   var cursorPointer;
+  cursor = document.getElementById("cursor");
+  cursorPointer = document.getElementById("cursor-pointer");
 
   useEffect(() => {
-    cursor = document.getElementById("cursor");
-    cursorPointer = document.getElementById("cursor-pointer");
-
     document.body.addEventListener("mousemove", function (e) {
       return (
         (cursor.style.left = e.clientX + "px"),
@@ -52,7 +51,7 @@ function App() {
         (cursorPointer.style.width = "2rem")
       );
     });
-  }, []);
+  }, [cursor.style, cursorPointer.style]);
 
   return (
     <div className="App">

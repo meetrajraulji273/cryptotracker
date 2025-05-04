@@ -31,7 +31,7 @@ function Compare() {
 
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   const getData = async () => {
     setLoading(true);

@@ -6,7 +6,7 @@ import iphone from "../../../assets/iphone.png";
 import { motion } from "framer-motion";
 import { RWebShare } from "react-web-share";
 import { toast } from "react-toastify";
-import Footer from "../../Common/Footer/footer";
+// import Footer from "../../Common/Footer/footer";
 
 function MainComponent() {
   return (
@@ -59,7 +59,7 @@ function MainComponent() {
           </motion.div>
         </div>
         <div className="gradient-div">
-          <img src={gradient} className="gradient" />
+          <img src={gradient} className="gradient" alt=""/>
           <motion.img
             src={iphone}
             className="iphone"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "../components/Common/Button";
 import Header from "../components/Common/Header";
 import TabsComponent from "../components/Dashboard/Tabs";
@@ -8,18 +8,25 @@ function Watchlist() {
   const watchlist = JSON.parse(localStorage.getItem("watchlist"));
   const [coins, setCoins] = useState([]);
 
-  useEffect(() => {
-    if (watchlist) {
-      getData();
-    }
-  }, []);
-
-  const getData = async () => {
+  // const getData = async () => {
+  //   // your logic to fetch data
+  //   const allCoins = await get100Coins();
+  //   if (allCoins) {
+  //     setCoins(allCoins.filter((coin) => watchlist.includes(coin.id)));
+  //   }
+  // };
+  const getData = useCallback(async () => {
+    // your logic to fetch data
     const allCoins = await get100Coins();
     if (allCoins) {
       setCoins(allCoins.filter((coin) => watchlist.includes(coin.id)));
     }
-  };
+  }, [watchlist]);
+  useEffect(() => {
+    if (watchlist) {
+      getData();
+    }
+  }, [getData, watchlist]);
 
   return (
     <div>
