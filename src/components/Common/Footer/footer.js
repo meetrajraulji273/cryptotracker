@@ -11,7 +11,7 @@ function Footer() {
     document.documentElement.scrollTop = 0;
   }
   return (
-    <div className="footer">
+    <div className="footer" style={{ marginTop: "300px" }}>
       <h2 className="logo" onClick={() => topFunction()}>
         CryptoTracker<span>.</span>
       </h2>
