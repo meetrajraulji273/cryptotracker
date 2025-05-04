@@ -19,44 +19,50 @@ function App() {
     },
   });
 
-  var cursor;
-  var cursorPointer;
-  cursor = document.getElementById("cursor");
-  cursorPointer = document.getElementById("cursor-pointer");
-
   useEffect(() => {
-    document.body.addEventListener("mousemove", function (e) {
-      return (
-        (cursor.style.left = e.clientX + "px"),
-        (cursor.style.top = e.clientY + "px"),
-        (cursorPointer.style.left = e.clientX + "px"),
-        (cursorPointer.style.top = e.clientY + "px")
-      );
-    });
-
-    document.body.addEventListener("mousedown", function (e) {
-      return (
-        (cursor.style.height = "0.5rem"),
-        (cursor.style.width = "0.5rem"),
-        (cursorPointer.style.height = "3rem"),
-        (cursorPointer.style.width = "3rem")
-      );
-    });
-
-    document.body.addEventListener("mouseup", function (e) {
-      return (
-        (cursor.style.height = "0.3rem"),
-        (cursor.style.width = "0.3rem"),
-        (cursorPointer.style.height = "2rem"),
-        (cursorPointer.style.width = "2rem")
-      );
-    });
-  }, [cursor.style, cursorPointer.style]);
+    const cursor = document.getElementById("cursor");
+    const cursorPointer = document.getElementById("cursor-pointer");
+  
+    if (!cursor || !cursorPointer) return; // Prevent error if not found
+  
+    const handleMouseMove = (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+      cursorPointer.style.left = e.clientX + "px";
+      cursorPointer.style.top = e.clientY + "px";
+    };
+  
+    const handleMouseDown = () => {
+      cursor.style.height = "0.5rem";
+      cursor.style.width = "0.5rem";
+      cursorPointer.style.height = "3rem";
+      cursorPointer.style.width = "3rem";
+    };
+  
+    const handleMouseUp = () => {
+      cursor.style.height = "0.3rem";
+      cursor.style.width = "0.3rem";
+      cursorPointer.style.height = "2rem";
+      cursorPointer.style.width = "2rem";
+    };
+  
+    document.body.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener("mousedown", handleMouseDown);
+    document.body.addEventListener("mouseup", handleMouseUp);
+  
+    // Cleanup to avoid memory leaks
+    return () => {
+      document.body.removeEventListener("mousemove", handleMouseMove);
+      document.body.removeEventListener("mousedown", handleMouseDown);
+      document.body.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+  
 
   return (
     <div className="App">
-      <div className="cursor" id="cursor" />
-      <div className="cursor-pointer" id="cursor-pointer" />
+      <div id="cursor" className="cursor-style" />
+      <div id="cursor-pointer" className="cursor-pointer-style" />
       <ToastContainer />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
